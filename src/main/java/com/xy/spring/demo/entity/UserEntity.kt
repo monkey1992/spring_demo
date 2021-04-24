@@ -1,8 +1,10 @@
 package com.xy.spring.demo.entity
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonInclude
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(value = ["pwd"])
 data class UserEntity(
 
         /** 用户ID  */
