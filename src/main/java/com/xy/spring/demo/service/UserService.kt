@@ -22,4 +22,8 @@ open class UserService {
     open fun getUserList(): List<UserEntity>? {
         return userMapper.getUserList()
     }
+
+    open fun updateUser(uid: String, forbid: String) {
+        userMapper.updateUser(uid, forbid)
+    }
 }

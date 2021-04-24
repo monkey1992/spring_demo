@@ -12,10 +12,7 @@ import io.swagger.annotations.ApiParam
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.redis.core.StringRedisTemplate
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestMethod
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import javax.servlet.http.HttpServletRequest
 
 @RestController
@@ -37,7 +34,7 @@ class UserController {
     fun registration(@RequestParam(value = "userName") @ApiParam("用户名") userName: String,
                      @RequestParam(value = "password") @ApiParam("密码") password: String,
                      @RequestParam(value = "imoocId") @ApiParam("imoocId") imoocId: String,
-                     @RequestParam(value = "orderId") @ApiParam("订单ID") orderId: String): Any {
+                     @RequestParam(value = "orderId") @ApiParam("订单ID") orderId: String): ResponseEntity {
         System.out.println("registration $userName, $password, $imoocId, $orderId")
         userService.addUser(userName, bCryptPasswordEncoder.encode(password), imoocId, orderId, currentDate())
         return ResponseEntity.success("registration success.")
@@ -47,7 +44,7 @@ class UserController {
     @RequestMapping(value = ["/login"], method = [RequestMethod.POST])
     fun login(@RequestParam(value = "userName") @ApiParam("用户名") userName: String,
               @RequestParam(value = "password") @ApiParam("密码") password: String,
-              httpServletRequest: HttpServletRequest): Any {
+              httpServletRequest: HttpServletRequest): ResponseEntity {
         System.out.println("login $userName, $password")
         val userEntities = userService.findUser(userName)
         if (userEntities.isNullOrEmpty()) {
@@ -70,5 +67,13 @@ class UserController {
         PageHelper.startPage<UserEntity>(pageIndex, pageSize)
         val userList = userService.getUserList()
         return ResponseEntity.success(data = getPageData(userList))
+    }
+
+    @ApiOperation(value = "用户管理 ")
+    @RequestMapping(value = ["/{uid}"], method = [RequestMethod.PUT])
+    fun updateUser(@PathVariable @ApiParam("用户ID") uid: String,
+                   @RequestParam(value = "forbid") @ApiParam("是否禁用") forbid: String): ResponseEntity {
+        userService.updateUser(uid, forbid)
+        return ResponseEntity.success("操作成功")
     }
 }

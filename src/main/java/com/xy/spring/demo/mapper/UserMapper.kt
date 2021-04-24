@@ -11,4 +11,6 @@ interface UserMapper {
     fun findUser(userName: String): List<UserEntity>?
 
     fun getUserList(): List<UserEntity>?
+
+    fun updateUser(uid: String, forbid: String)
 }
