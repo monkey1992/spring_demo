@@ -9,4 +9,6 @@ interface UserMapper {
     fun addUser(userName: String, password: String, imoocId: String, orderId: String, createTime: String)
 
     fun findUser(userName: String): List<UserEntity>?
+
+    fun getUserList(): List<UserEntity>?
 }

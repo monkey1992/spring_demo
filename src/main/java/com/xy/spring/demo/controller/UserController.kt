@@ -1,11 +1,11 @@
 package com.xy.spring.demo.controller
 
+import com.github.pagehelper.PageHelper
+import com.github.pagehelper.PageInfo
 import com.xy.spring.demo.entity.ResponseEntity
+import com.xy.spring.demo.entity.UserEntity
 import com.xy.spring.demo.service.UserService
-import com.xy.spring.demo.util.ResponseCode
-import com.xy.spring.demo.util.addUser
-import com.xy.spring.demo.util.currentDate
-import com.xy.spring.demo.util.getKey
+import com.xy.spring.demo.util.*
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiParam
@@ -61,5 +61,14 @@ class UserController {
         val session = httpServletRequest.session
         addUser(redisTemplate, session, userEntity)
         return ResponseEntity.success("登录成功", getKey(session))
+    }
+
+    @ApiOperation(value = "获取用户列表")
+    @RequestMapping(value = ["/users"], method = [RequestMethod.GET])
+    fun getUserList(@RequestParam(value = "pageIndex", defaultValue = "1") @ApiParam("起始页编号") pageIndex: Int,
+                    @RequestParam(value = "pageSize", defaultValue = "10") @ApiParam("每页显示的数量") pageSize: Int): ResponseEntity {
+        PageHelper.startPage<UserEntity>(pageIndex, pageSize)
+        val userList = userService.getUserList()
+        return ResponseEntity.success(data = getPageData(userList))
     }
 }

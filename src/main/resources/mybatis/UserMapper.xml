@@ -19,4 +19,11 @@
         WHERE
             user_name = #{userName}
     </select>
+
+    <select id="getUserList" resultType="com.xy.spring.demo.entity.UserEntity">
+        SELECT
+            *
+        FROM
+            t_user
+    </select>
 </mapper>

@@ -23,7 +23,7 @@ data class ResponseEntity(val code: Int,
         }
 
         @JvmOverloads
-        fun success(msg: String = "", data: Any? = null): ResponseEntity {
+        fun success(msg: String = "SUCCESS", data: Any? = null): ResponseEntity {
             return of(ResponseCode.RC_SUCCESS).apply {
                 this.message = msg
                 this.data = data

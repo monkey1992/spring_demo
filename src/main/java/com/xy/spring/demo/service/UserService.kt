@@ -18,4 +18,8 @@ open class UserService {
     open fun findUser(userName: String): List<UserEntity>? {
         return userMapper.findUser(userName)
     }
+
+    open fun getUserList(): List<UserEntity>? {
+        return userMapper.getUserList()
+    }
 }

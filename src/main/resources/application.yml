@@ -28,3 +28,9 @@ mybatis:
   type-aliases-package: com.xy.spring.demo.entity # 注意：对应实体类的路径
   configuration:
     map-underscore-to-camel-case: true # 数据库字段下划线自动转驼峰
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: false # 如果开启分页优化，在分页的时候如果没有数据，会显示有数据页面的数据
+  supportMethodsArguments: true
+  params: count=countSql
