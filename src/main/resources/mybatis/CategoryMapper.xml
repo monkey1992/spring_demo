@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xy.spring.demo.mapper.CategoryMapper">
+    <insert id="addCategory">
+        INSERT INTO t_goods_category ( category_name, create_time )
+        VALUES
+            ( #{categoryName}, #{createTime})
+    </insert>
+
+    <select id="findCategory" resultType="com.xy.spring.demo.entity.CategoryEntity">
+        SELECT
+            *
+        FROM
+            t_goods_category
+        WHERE
+            category_name = #{categoryName}
+    </select>
+
+    <select id="getCategoryList" resultType="com.xy.spring.demo.entity.CategoryEntity">
+        SELECT
+            *
+        FROM
+            t_goods_category
+        ORDER BY
+            category_id
+    </select>
+    <update id="updateCategory">
+        UPDATE t_goods_category SET category_name=#{categoryName} WHERE category_id=#{categoryId}
+    </update>
+</mapper>

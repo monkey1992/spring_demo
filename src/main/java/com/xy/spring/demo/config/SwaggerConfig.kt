@@ -31,6 +31,7 @@ open class SwaggerConfig {
                 .ignoredParameterTypes(ApiIgnore::class.java)
                 .enableUrlTemplating(false)
                 .tags(Tag("Account", "账号模块"))
+                .tags(Tag("CategoryEntity", "商品类别"))
     }
 
     private fun apiInfo(): ApiInfo {
