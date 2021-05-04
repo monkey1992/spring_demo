@@ -8,6 +8,10 @@
             ( #{categoryName}, #{createTime})
     </insert>
 
+    <insert id="removeCategory">
+        DELETE FROM t_goods_category WHERE category_id = #{categoryId}
+    </insert>
+
     <select id="findCategory" resultType="com.xy.spring.demo.entity.CategoryEntity">
         SELECT
             *

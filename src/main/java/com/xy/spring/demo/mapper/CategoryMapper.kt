@@ -8,6 +8,8 @@ interface CategoryMapper {
 
     fun addCategory(categoryName: String, createTime: String)
 
+    fun removeCategory(categoryId: String)
+
     fun findCategory(categoryName: String): List<CategoryEntity>?
 
     fun getCategoryList(): List<CategoryEntity>?
