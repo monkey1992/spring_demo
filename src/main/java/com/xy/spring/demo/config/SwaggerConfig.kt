@@ -32,6 +32,7 @@ open class SwaggerConfig {
                 .enableUrlTemplating(false)
                 .tags(Tag("Account", "账号模块"))
                 .tags(Tag("CategoryEntity", "商品类别"))
+                .tags(Tag("City", "城市服务模块"))
     }
 
     private fun apiInfo(): ApiInfo {
