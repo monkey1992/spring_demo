@@ -5,7 +5,7 @@ import org.springframework.data.redis.core.StringRedisTemplate
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpSession
 
-const val BOARDING_PASS = "boarding-[ass"
+const val BOARDING_PASS = "boarding-pass"
 
 /**
  * 将用户信息保存到redis
@@ -27,6 +27,13 @@ fun removeUser(redisTemplate: StringRedisTemplate, httpSession: HttpSession) {
  */
 fun getUser(redisTemplate: StringRedisTemplate, httpServletRequest: HttpServletRequest): UserEntity? {
     return fromJson(redisTemplate.opsForValue().get(httpServletRequest.getBoardingPass()), UserEntity::class.java)
+}
+
+/**
+ * 检查Redis中是否存在用户
+ */
+fun checkUser(redisTemplate: StringRedisTemplate, request: HttpServletRequest): Boolean {
+    return redisTemplate.opsForValue().get(request.getBoardingPass()) != null
 }
 
 fun getKey(httpSession: HttpSession): String {

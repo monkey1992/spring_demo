@@ -2,6 +2,7 @@ package com.xy.spring.demo.controller
 
 import com.github.pagehelper.PageHelper
 import com.github.pagehelper.PageInfo
+import com.xy.spring.demo.config.NeedLogin
 import com.xy.spring.demo.entity.ResponseEntity
 import com.xy.spring.demo.entity.UserEntity
 import com.xy.spring.demo.service.UserService
@@ -58,6 +59,15 @@ class UserController {
         val session = httpServletRequest.session
         addUser(redisTemplate, session, userEntity)
         return ResponseEntity.success("登录成功", getKey(session))
+    }
+
+    @NeedLogin
+    @ApiOperation(value = "登出")
+    @RequestMapping(value = ["/logout"])
+    fun logout(request: HttpServletRequest): ResponseEntity {
+        val session = request.session
+        removeUser(redisTemplate, session)
+        return ResponseEntity.success("logout success")
     }
 
     @ApiOperation(value = "获取用户列表")
