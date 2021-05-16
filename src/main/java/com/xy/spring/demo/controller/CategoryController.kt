@@ -36,7 +36,7 @@ class CategoryController {
     }
 
     @ApiOperation(value = "添加商品类别")
-    @RequestMapping(value = [""], method = [RequestMethod.PUT])
+    @RequestMapping(value = [""], method = [RequestMethod.POST])
     fun addCategory(@RequestParam(value = "categoryName") @ApiParam("商品类别") categoryName: String): ResponseEntity {
         return try {
             categoryService.addCategory(categoryName)
